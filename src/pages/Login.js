@@ -1,9 +1,15 @@
 import React from 'react'
 import './css/Login.css'
+import PreNavbar from '../components/PreNavbar'
 
 function Login() {
   return (
-    <div className='Login'>Login</div>
+    <div className='Login'>
+      <div className='background'></div>
+      <div className='content'>
+        <PreNavbar />
+      </div>
+    </div>
   )
 }
 

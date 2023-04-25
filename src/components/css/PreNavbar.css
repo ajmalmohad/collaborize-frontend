@@ -1,0 +1,42 @@
+.PreNavbar{
+    height: 80px;
+    background: transparent;
+    padding: 16px min(8%, 40px);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.PreNavbar img{
+    height: 30px;
+}
+
+.PreNavbar .Others{
+    display: flex;
+    flex-direction: row;
+}
+
+.PreNavbar .Others a{
+    text-decoration: none;
+    color: white;
+}
+
+.PreNavbar .Others p{
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+@media screen and (max-width:600px) {
+    .PreNavbar .Others p{
+        font-size: 14px;
+        margin-left: 10px;
+    }
+
+    .PreNavbar img{
+        height: 20px;
+    }
+}
