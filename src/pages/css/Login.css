@@ -5,14 +5,76 @@
 }
 
 .Login .background{
-    position: absolute;
+    position: fixed;
     z-index: 0;
     height: 100%;
     width: 100%;
-    background-image: linear-gradient(45deg, rgba(39,42,55,255), rgba(39,42,55,125), transparent);
+    background-image: linear-gradient(45deg, var(--dark-gray), var(--dark-gray), transparent);
 }
 
 .Login .content{
     position: relative;
     z-index: 1;
+}
+
+.Login .content .form{
+    min-height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    padding: max(5%, 50px);
+}
+
+.Login .content .form >*{
+    margin: 10px 0px;
+}
+
+.Login .content .form > .TextField{
+    margin-bottom: 10px;
+}
+
+.Login .content .form > .SubmitButton{
+    margin-top: 20px;
+}
+
+.Login .content .form h1{
+    font-size: 45px;
+    font-weight: 500;
+    line-height: 120%;
+}
+
+.Login .content .form .redirect{
+    display: flex;
+    align-items: center;
+}
+
+.Login .content .form .redirect .label{
+    margin-right: 6px;
+    color: var(--off-gray);
+}
+
+.Login .content .form h1 .dot{
+    color: var(--accent-blue);
+}
+
+.Login .content .form .TextField,
+.Login .content .form .SubmitButton{
+    width: min(500px, 100%);
+}
+
+@media screen and (max-width:900px) {
+    .Login .content .form h1{
+        font-size: 40px;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .Login .content .form h1 .continue{
+        display: none;
+    }
+
+    .Login .content .form{
+        padding: max(5%, 30px);
+    }
 }

@@ -1,0 +1,12 @@
+.SubmitButton button{
+    background: var(--accent-blue);
+    width: 100%;
+    min-width: 0px;
+    font-family: 'Poppins', sans-serif;
+    padding: 16px 20px;
+    border: none;
+    border-radius: 10px;
+    color: var(--white);
+    cursor: pointer;
+    font-size: 16px;
+}
