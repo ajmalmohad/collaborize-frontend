@@ -19,7 +19,7 @@ function Signup() {
             <TextField label={"Email"} type={"email"}/>
             <TextField label={"Name"} type={"text"}/>
             <TextField label={"Password"} type={"password"}/>
-            <SubmitButton value={"Login"}/>
+            <SubmitButton value={"Create New Account"}/>
         </div>
       </div>
     </div>
