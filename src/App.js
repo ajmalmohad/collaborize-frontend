@@ -20,9 +20,9 @@ function App() {
         <Route path="/" element={ <Enter/> } />
         <Route path="/login" element={ <AntiProtected><Login/></AntiProtected> } />
         <Route path="/signup" element={ <AntiProtected><Signup/></AntiProtected> } />
-        <Route path="/home" element={ <Protected><Templated><Home/></Templated></Protected> } />
-        <Route path="/chat" element={ <Protected><Templated><Chat/></Templated></Protected> } />
-        <Route path="/draw" element={ <Protected><Templated><Draw/></Templated></Protected> } />
+        <Route path="/home" element={ <Protected><Templated label={"Home"}><Home/></Templated></Protected> } />
+        <Route path="/chat" element={ <Protected><Templated label={"Chat"}><Chat/></Templated></Protected> } />
+        <Route path="/draw" element={ <Protected><Templated label={"Draw"}><Draw/></Templated></Protected> } />
         <Route path="*" element={ <Error/> } />
       </Routes>
       <div><Toaster position='bottom-right'/></div>
