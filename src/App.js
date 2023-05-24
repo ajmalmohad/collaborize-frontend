@@ -7,10 +7,9 @@ import Enter from './pages/Enter';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Error from './pages/Error';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
-
-
 
   return (
     <div className="App">
@@ -21,6 +20,7 @@ function App() {
         <Route path="/home" element={ <Protected><Home/></Protected> } />
         <Route path="*" element={ <Error/> } />
       </Routes>
+      <div><Toaster position='bottom-right'/></div>
     </div>
   );
 }
