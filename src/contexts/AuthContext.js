@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext } from 'react';
 import Proptypes from 'prop-types';
+import usePersistedState from './usePersistedState'
   
 const AppContext = createContext();
 export const useAppContext = () => {
@@ -9,8 +10,8 @@ export const useAppContext = () => {
 };
   
 export const AppContextProvider = ({ children }) => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [user, setUser] = useState({});
+    const [isLoggedIn, setIsLoggedIn] = usePersistedState('isLoggedIn', false);
+    const [user, setUser] = usePersistedState('user', {});
 
     return (
         <AppContext.Provider value={{ isLoggedIn, setIsLoggedIn, user, setUser }}>

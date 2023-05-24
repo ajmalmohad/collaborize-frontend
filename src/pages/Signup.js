@@ -37,6 +37,7 @@ function Signup() {
   }
 
   const isErrors = () => {
+      toast.dismiss();
       const emailRegex = /\S+@\S+\.\S+/;
       const passwordRegex = /.{8,}/;
 
@@ -74,7 +75,7 @@ function Signup() {
       if(!isErrors()){
         console.log("Successful");
       }else{
-        console.log(errors);
+        console.log(fields);
       }
   }
 

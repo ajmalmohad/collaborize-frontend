@@ -5,8 +5,11 @@ import TextField from '../components/TextField'
 import { Link } from 'react-router-dom'
 import SubmitButton from '../components/SubmitButton'
 import { toast } from 'react-hot-toast'
+import { useAppContext } from './../contexts/AuthContext'
 
 function Login() {
+
+  let { setIsLoggedIn } = useAppContext();
 
   useEffect(() => {
     return () => {
@@ -35,6 +38,7 @@ function Login() {
   }
 
   const isErrors = () => {
+      toast.dismiss();
       const emailRegex = /\S+@\S+\.\S+/;
       const passwordRegex = /.{8,}/;
 
@@ -64,9 +68,11 @@ function Login() {
 
   const handleSubmit = () => {
       if(!isErrors()){
-        console.log("Successful");
+        //Call API and Redirect when setted
+        setIsLoggedIn(true);
+        console.log(fields);
       }else{
-        console.log(errors);
+        console.log("Error");
       }
   }
 
