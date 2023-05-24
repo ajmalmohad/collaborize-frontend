@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './css/Signup.css'
 import PreNavbar from '../components/PreNavbar'
 import TextField from '../components/TextField'
@@ -7,6 +7,12 @@ import SubmitButton from '../components/SubmitButton'
 import { toast } from 'react-hot-toast'
 
 function Signup() {
+
+  useEffect(() => {
+    return () => {
+      toast.dismiss();
+    }
+  }, [])
 
   const [errors, setErrors] = useState({
     email: false,
