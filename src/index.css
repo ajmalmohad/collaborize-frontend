@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 :root{
+  --very-dark-gray: #171920;
   --dark-gray: #262a36;
   --medium-gray: #333645;
   --accent-blue: #1e90ee;

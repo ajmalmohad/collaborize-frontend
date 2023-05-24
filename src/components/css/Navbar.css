@@ -1,6 +1,6 @@
 .Navbar{
     height: 80px;
-    background: transparent;
+    background: var(--dark-gray);
     padding: 16px min(8%, 40px);
     display: flex;
     flex-direction: row;
@@ -20,8 +20,19 @@
 .Navbar .Others p{
     font-size: 16px;
     font-weight: 500;
-    color: white;
+    color: var(--white);
     margin-left: 20px;
+    cursor: pointer;
+}
+
+.Navbar .Others button.logout{
+    padding:10px 16px;
+    background: var(--error);
+    color: var(--white);
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    border:none;
+    border-radius: 8px;
     cursor: pointer;
 }
 

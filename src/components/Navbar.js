@@ -15,7 +15,7 @@ function Navbar() {
     <div className='Navbar'>
         <img src={Logo} alt='Logo' />
         <div className='Others'>
-            <button onClick={handleClick}><p>Logout</p></button>
+            <button className='logout' onClick={handleClick}>Logout</button>
         </div>
     </div>
   )
