@@ -1,0 +1,48 @@
+.Navbar{
+    height: 80px;
+    background: transparent;
+    padding: 16px min(8%, 40px);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Navbar img{
+    height: 30px;
+}
+
+.Navbar .Others{
+    display: flex;
+    flex-direction: row;
+}
+
+.Navbar .Others p{
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+@media screen and (max-width:600px) {
+    .Navbar .Others p{
+        font-size: 14px;
+        margin-left: 10px;
+    }
+
+    .Navbar img{
+        height: 20px;
+    }
+}
+
+@media screen and (max-width:300px) {
+    .Navbar .Others p{
+        font-size: 12px;
+        margin-left: 10px;
+    }
+
+    .Navbar img{
+        height: 16px;
+    }
+}

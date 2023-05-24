@@ -5,8 +5,11 @@ import TextField from '../components/TextField'
 import { Link } from 'react-router-dom'
 import SubmitButton from '../components/SubmitButton'
 import { toast } from 'react-hot-toast'
+import { useAppContext } from './../contexts/AuthContext'
 
 function Signup() {
+
+  let { setIsLoggedIn } = useAppContext();
 
   useEffect(() => {
     return () => {
@@ -73,9 +76,11 @@ function Signup() {
 
   const handleSubmit = () => {
       if(!isErrors()){
-        console.log("Successful");
-      }else{
+        //Call API and Redirect when setted
+        setIsLoggedIn(true);
         console.log(fields);
+      }else{
+        console.log("Error");
       }
   }
 
