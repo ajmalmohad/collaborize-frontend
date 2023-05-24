@@ -10,6 +10,8 @@ import { postData } from './../api/post'
 
 function Signup() {
 
+  const [disabled, setDisabled] = useState(false);
+
   let { setIsLoggedIn, setUser } = useAppContext();
 
   useEffect(() => {
@@ -41,7 +43,6 @@ function Signup() {
   }
 
   const isErrors = () => {
-      toast.dismiss();
       const emailRegex = /\S+@\S+\.\S+/;
       const passwordRegex = /.{8,}/;
 
@@ -75,30 +76,39 @@ function Signup() {
       return false;
   }
 
-  const handleSubmit = () => {
-      toast.dismiss();
-      if(!isErrors()){
-        postData("/auth/signup", { user: fields })
-        .then((data)=>{
-          if(!data.userId){
-            if(data.message){
-              toast.error(data.message);
-              console.error(data.message);
-            }else{
-              toast.error("Request Failed");
-              console.error("Request Failed");
-            }
-          }else {
-            setIsLoggedIn(true);
-            setUser(data);
-          }
-        })
-        .catch((err)=>{
-          console.log(err);
-        })
-      }else{
-        console.log("Error");
+  const submitForm = () => {
+    setDisabled(true);
+    toast.dismiss();
+    const toastId = toast.loading('Processing...');
+    postData("/auth/signup", { user: fields })
+    .then((data)=>{
+      if(!data.userId){
+        if(data.message){
+          toast.error(data.message, { id: toastId });
+          console.error(data.message);
+        }else{
+          toast.error("Request Failed", { id: toastId });
+          console.error("Request Failed");
+        }
+      }else {
+        setIsLoggedIn(true);
+        setUser(data);
       }
+      setDisabled(false);
+    })
+    .catch((err)=>{
+      console.log(err);
+      setDisabled(false);
+    })
+  }
+  
+
+  const handleSubmit = () => {
+    if(!isErrors() && !disabled){
+      submitForm()
+    }else{
+      console.log("Error");
+    }
   }
 
   return (

@@ -10,6 +10,8 @@ import { postData } from './../api/post'
 
 function Login() {
 
+  const [disabled, setDisabled] = useState(false);
+
   let { setIsLoggedIn, setUser } = useAppContext();
 
   useEffect(() => {
@@ -65,32 +67,41 @@ function Login() {
       setErrors({email: false, password: false })
       return false;
   }
+
+
+  const submitForm = () => {
+    setDisabled(true);
+    toast.dismiss();
+    const toastId = toast.loading('Processing...');
+    postData("/auth/login", { user: fields })
+    .then((data)=>{
+      if(!data.userId){
+        if(data.message){
+          toast.error(data.message, { id: toastId });
+          console.error(data.message);
+        }else{
+          toast.error("Request Failed", { id: toastId });
+          console.error("Request Failed");
+        }
+      }else {
+        setIsLoggedIn(true);
+        setUser(data);
+      }
+      setDisabled(false);
+    })
+    .catch((err)=>{
+      console.log(err);
+      setDisabled(false);
+    })
+  }
   
 
   const handleSubmit = () => {
-      toast.dismiss();
-      if(!isErrors()){
-        postData("/auth/login", { user: fields })
-        .then((data)=>{
-          if(!data.userId){
-            if(data.message){
-              toast.error(data.message);
-              console.error(data.message);
-            }else{
-              toast.error("Request Failed");
-              console.error("Request Failed");
-            }
-          }else {
-            setIsLoggedIn(true);
-            setUser(data);
-          }
-        })
-        .catch((err)=>{
-          console.log(err);
-        })
-      }else{
-        console.log("Error");
-      }
+    if(!isErrors() && !disabled){
+      submitForm()
+    }else{
+      console.log("Error");
+    }
   }
 
 
