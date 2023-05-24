@@ -6,10 +6,11 @@ import { Link } from 'react-router-dom'
 import SubmitButton from '../components/SubmitButton'
 import { toast } from 'react-hot-toast'
 import { useAppContext } from './../contexts/AuthContext'
+import { postData } from './../api/post'
 
 function Login() {
 
-  let { setIsLoggedIn } = useAppContext();
+  let { setIsLoggedIn, setUser } = useAppContext();
 
   useEffect(() => {
     return () => {
@@ -38,7 +39,6 @@ function Login() {
   }
 
   const isErrors = () => {
-      toast.dismiss();
       const emailRegex = /\S+@\S+\.\S+/;
       const passwordRegex = /.{8,}/;
 
@@ -65,12 +65,29 @@ function Login() {
       setErrors({email: false, password: false })
       return false;
   }
+  
 
   const handleSubmit = () => {
+      toast.dismiss();
       if(!isErrors()){
-        //Call API and Redirect when setted
-        setIsLoggedIn(true);
-        console.log(fields);
+        postData("/auth/login", { user: fields })
+        .then((data)=>{
+          if(!data.userId){
+            if(data.message){
+              toast.error(data.message);
+              console.error(data.message);
+            }else{
+              toast.error("Request Failed");
+              console.error("Request Failed");
+            }
+          }else {
+            setIsLoggedIn(true);
+            setUser(data);
+          }
+        })
+        .catch((err)=>{
+          console.log(err);
+        })
       }else{
         console.log("Error");
       }

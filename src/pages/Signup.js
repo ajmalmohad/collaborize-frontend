@@ -6,10 +6,11 @@ import { Link } from 'react-router-dom'
 import SubmitButton from '../components/SubmitButton'
 import { toast } from 'react-hot-toast'
 import { useAppContext } from './../contexts/AuthContext'
+import { postData } from './../api/post'
 
 function Signup() {
 
-  let { setIsLoggedIn } = useAppContext();
+  let { setIsLoggedIn, setUser } = useAppContext();
 
   useEffect(() => {
     return () => {
@@ -75,10 +76,26 @@ function Signup() {
   }
 
   const handleSubmit = () => {
+      toast.dismiss();
       if(!isErrors()){
-        //Call API and Redirect when setted
-        setIsLoggedIn(true);
-        console.log(fields);
+        postData("/auth/signup", { user: fields })
+        .then((data)=>{
+          if(!data.userId){
+            if(data.message){
+              toast.error(data.message);
+              console.error(data.message);
+            }else{
+              toast.error("Request Failed");
+              console.error("Request Failed");
+            }
+          }else {
+            setIsLoggedIn(true);
+            setUser(data);
+          }
+        })
+        .catch((err)=>{
+          console.log(err);
+        })
       }else{
         console.log("Error");
       }
