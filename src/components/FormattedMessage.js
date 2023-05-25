@@ -1,7 +1,7 @@
 import React from 'react'
 import './css/FormattedMessage.css'
 
-function FormattedMessage({name, email, message, time}) {
+function FormattedMessage({name, email, message, time, isMe}) {
 
     function formatDateFromTimestamp(timestamp) {
         const date = new Date(timestamp);
@@ -9,7 +9,7 @@ function FormattedMessage({name, email, message, time}) {
     }
     
   return (
-    <div className='FormattedMessage'>
+    <div className={`FormattedMessage ${isMe ? "colored" : ""}`}>
         <div className='header'>
             <p className='username'><dfn title={email}>{name}</dfn></p>
             <p>{formatDateFromTimestamp(time)}</p>

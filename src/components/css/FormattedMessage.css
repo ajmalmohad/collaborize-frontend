@@ -6,6 +6,11 @@
     border-radius: 10px;
     margin: 10px 0;
     width: min(500px, 80%);
+    word-break: break-all;
+}
+
+.FormattedMessage.colored{
+    background: var(--second-blue);
 }
 
 .FormattedMessage .header{

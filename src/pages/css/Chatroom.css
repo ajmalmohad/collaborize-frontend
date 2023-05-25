@@ -24,9 +24,19 @@
 }
 
 .Chatroom .chatwindow .chats{
+    width: 100%;
     height: calc(100% - 60px);
     padding: 20px;
     overflow-y: scroll;
+}
+
+.Chatroom .chatwindow .chats .chat{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.Chatroom .chatwindow .chats .myside{
+    justify-content: flex-end;
 }
 
 .Chatroom .chatwindow .sender{

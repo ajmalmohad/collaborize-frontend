@@ -93,7 +93,9 @@ function Chatroom() {
       <div className='chatwindow'>
         <div className='chats no-scrollbar'>
           {messagesRecieved.map((msg, i) => (
-            <FormattedMessage key={i} name={msg.name} email={msg.email} time={msg.__createdtime__} message={msg.message} />
+            <div key={i} className={`chat ${(msg.email===user.email) ? "myside" : ""}`}>
+              <FormattedMessage isMe={(msg.email===user.email)} name={msg.name} email={msg.email} time={msg.__createdtime__} message={msg.message} />
+            </div>
           ))}
           <div ref={BottomRef} />
         </div>
