@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import './css/Chatroom.css'
 import { useAppContext } from './../contexts/AuthContext'
 import { useNavigate } from 'react-router-dom'
@@ -10,6 +10,7 @@ import FormattedMessage from '../components/FormattedMessage'
 function Chatroom() {
 
   const navigate = useNavigate();
+  const BottomRef = useRef(null);
 
   const { socket,  user, room, setRoom } = useAppContext();
   const [messagesRecieved, setMessagesReceived] = useState([]);
@@ -42,6 +43,11 @@ function Chatroom() {
       // Set Room to null to recuce sideeffects
     }
   }, [socket]);
+
+  useEffect(() => {
+    BottomRef.current?.scrollIntoView({ behavior: "smooth" })
+  }, [messagesRecieved])
+  
 
   const leaveRoom = () => {
     const username = user.name;
@@ -82,6 +88,7 @@ function Chatroom() {
           {messagesRecieved.map((msg, i) => (
             <FormattedMessage key={i} username={msg.username} time={msg.__createdtime__} message={msg.message} />
           ))}
+          <div ref={BottomRef} />
         </div>
 
         <div className='sender'>
