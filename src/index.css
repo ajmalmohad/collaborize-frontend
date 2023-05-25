@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 :root{
-  --very-dark-gray: #171920;
-  --dark-gray: #262a36;
+  --very-dark-gray: #131313;
+  --dark-gray: #202329;
   --medium-gray: #333645;
   --accent-blue: #1e90ee;
   --light-gray: #3c414b;
@@ -10,6 +10,7 @@
   --white: #FFFFFF;
   --off-gray: #bdbdbd;
   --error: #CC0000;
+  --second-blue: #6B8AFD;
 }
 
 *{
@@ -30,4 +31,12 @@ body {
 a{
   text-decoration: none;
   color: var(--accent-blue);
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; 
+  scrollbar-width: none;  
+}
+.no-scrollbar::-webkit-scrollbar { 
+  display: none;  
 }

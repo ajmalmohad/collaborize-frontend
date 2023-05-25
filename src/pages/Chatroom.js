@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { Navigate } from 'react-router-dom'
 import ChatRoomBar from '../components/ChatRoomBar'
 import ChatField from '../components/ChatField'
+import FormattedMessage from '../components/FormattedMessage'
 
 function Chatroom() {
 
@@ -42,11 +43,6 @@ function Chatroom() {
     }
   }, [socket]);
 
-  function formatDateFromTimestamp(timestamp) {
-    const date = new Date(timestamp);
-    return date.toLocaleString();
-  }
-
   const leaveRoom = () => {
     const username = user.name;
     const __createdtime__ = Date.now();
@@ -82,18 +78,9 @@ function Chatroom() {
     <div className='Chatroom'>
       
       <div className='chatwindow'>
-        <div className='chats'>
+        <div className='chats no-scrollbar'>
           {messagesRecieved.map((msg, i) => (
-            <div key={i}>
-              <div>
-                <span>{msg.username}</span>
-                <span>
-                  {formatDateFromTimestamp(msg.__createdtime__)}
-                </span>
-              </div>
-              <p>{msg.message}</p>
-              <br />
-            </div>
+            <FormattedMessage key={i} username={msg.username} time={msg.__createdtime__} message={msg.message} />
           ))}
         </div>
 

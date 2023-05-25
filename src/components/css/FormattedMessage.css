@@ -1,0 +1,22 @@
+.FormattedMessage{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background: var(--light-gray);
+    border-radius: 10px;
+    margin: 10px 0;
+    width: min(500px, 80%);
+}
+
+.FormattedMessage .header{
+    font-style: oblique;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--off-gray);
+}
+
+.FormattedMessage .header .username{
+    font-weight: 600;
+}
