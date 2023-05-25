@@ -4,17 +4,20 @@ import { useAppContext } from './../contexts/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import TextField from '../components/TextField'
 import SubmitButton from '../components/SubmitButton'
+import { Navigate } from 'react-router-dom'
+import ChatRoomBar from '../components/ChatRoomBar'
 
 function Chatroom() {
 
   const navigate = useNavigate();
 
-  const { socket,  user, room } = useAppContext();
+  const { socket,  user, room, setRoom } = useAppContext();
   const [messagesRecieved, setMessagesReceived] = useState([]);
-  const [roomUsers, setRoomUsers] = useState([]);
+  const [ roomUsers, setRoomUsers ] = useState([]);
   const [message, setMessage] = useState('');
 
   useEffect(() => {
+    
     socket.on('receive_message', (data) => {
       console.log(data);
       setMessagesReceived((state) => [
@@ -36,6 +39,7 @@ function Chatroom() {
     return () => {
       socket.off('receive_message');
       socket.off('chatroom_users');
+      // Set Room to null to recuce sideeffects
     }
   }, [socket]);
 
@@ -48,6 +52,7 @@ function Chatroom() {
     const username = user.name;
     const __createdtime__ = Date.now();
     socket.emit('leave_room', { username, room, __createdtime__ });
+    setRoom("")
     navigate('/chat', { replace: true });
   };
 
@@ -76,33 +81,31 @@ function Chatroom() {
   }
 
   return (
+    room === "" ? <Navigate to="/chat" /> :
     <div className='Chatroom'>
       
-      {messagesRecieved.map((msg, i) => (
-        <div key={i}>
-          <div>
-            <span>{msg.username}</span>
-            <span>
-              {formatDateFromTimestamp(msg.__createdtime__)}
-            </span>
+      <div>
+        {messagesRecieved.map((msg, i) => (
+          <div key={i}>
+            <div>
+              <span>{msg.username}</span>
+              <span>
+                {formatDateFromTimestamp(msg.__createdtime__)}
+              </span>
+            </div>
+            <p>{msg.message}</p>
+            <br />
           </div>
-          <p>{msg.message}</p>
-          <br />
-        </div>
-      ))}
+        ))}
 
+        <TextField value={message} action={(e)=>handleChange(e,"message")} label={"Message"} />
+        <SubmitButton action={handleSubmit} value={"Send"} />
+        <SubmitButton action={handleLeave} value={"Leave"} />
+      </div>
 
-      {roomUsers.map((msg, i) => (
-        <div key={i}>
-            <span>{msg.username}</span>
-        </div>
-      ))}
-
-
-      <TextField value={message} action={(e)=>handleChange(e,"message")} label={"Message"} />
-      <SubmitButton action={handleSubmit} value={"Send"} />
-      <SubmitButton action={handleLeave} value={"Leave"} />
-
+      <div className='sidebar'>
+        <ChatRoomBar room={room} roomUsers={roomUsers} />
+      </div>
 
     </div>
   )

@@ -1,0 +1,14 @@
+.Chatroom{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    background: blue;
+    justify-content: space-between;
+}
+
+.Chatroom .sidebar{
+    width: 20%;
+    max-width: 200px;
+    min-width: 160px;
+}
