@@ -13,7 +13,7 @@ function ChatRoomBar({ room, roomUsers, onLeave }) {
         <div className='members'>
         {roomUsers.map((member, i) => (
             <div className='member' key={i}>
-                <FaUserCircle/><p>{member.username}</p>
+                <FaUserCircle/><p>{member.name}</p>
             </div>
         ))}
         </div>
