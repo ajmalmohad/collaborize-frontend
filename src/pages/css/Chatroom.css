@@ -1,14 +1,34 @@
 .Chatroom{
+    position: relative;
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: row;
-    background: blue;
+    background: var(--light-gray);
     justify-content: space-between;
+    overflow: hidden;
 }
 
 .Chatroom .sidebar{
     width: 20%;
     max-width: 200px;
     min-width: 160px;
+    overflow-y: auto;
+}
+
+.Chatroom .chatwindow{
+    position: relative;
+    height: auto;
+    width: 100%;
+    padding: 20px;
+}
+
+.Chatroom .chatwindow .chats{
+    height: calc(100% - 50px);
+    overflow-y: scroll;
+}
+
+.Chatroom .chatwindow .sender{
+    width: 100%;
+    height: 50px;
 }

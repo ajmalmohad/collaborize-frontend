@@ -2,10 +2,9 @@ import React, {useState, useEffect} from 'react'
 import './css/Chatroom.css'
 import { useAppContext } from './../contexts/AuthContext'
 import { useNavigate } from 'react-router-dom'
-import TextField from '../components/TextField'
-import SubmitButton from '../components/SubmitButton'
 import { Navigate } from 'react-router-dom'
 import ChatRoomBar from '../components/ChatRoomBar'
+import ChatField from '../components/ChatField'
 
 function Chatroom() {
 
@@ -65,11 +64,9 @@ function Chatroom() {
     }
   };
 
-  const handleChange = (event, label) => {
+  const handleChange = (event) => {
     let value = event.target.value;
-    if(label==="message"){
-      setMessage(value)
-    }
+    setMessage(value)
   }
 
   const handleSubmit = () => {
@@ -84,22 +81,26 @@ function Chatroom() {
     room === "" ? <Navigate to="/chat" /> :
     <div className='Chatroom'>
       
-      <div>
-        {messagesRecieved.map((msg, i) => (
-          <div key={i}>
-            <div>
-              <span>{msg.username}</span>
-              <span>
-                {formatDateFromTimestamp(msg.__createdtime__)}
-              </span>
+      <div className='chatwindow'>
+        <div className='chats'>
+          {messagesRecieved.map((msg, i) => (
+            <div key={i}>
+              <div>
+                <span>{msg.username}</span>
+                <span>
+                  {formatDateFromTimestamp(msg.__createdtime__)}
+                </span>
+              </div>
+              <p>{msg.message}</p>
+              <br />
             </div>
-            <p>{msg.message}</p>
-            <br />
-          </div>
-        ))}
+          ))}
+        </div>
 
-        <TextField value={message} action={(e)=>handleChange(e,"message")} label={"Message"} />
-        <SubmitButton action={handleSubmit} value={"Send"} />
+        <div className='sender'>
+          <ChatField textvalue={message} textaction={handleChange} submitaction={handleSubmit} />
+        </div>
+
       </div>
 
       <div className='sidebar'>
