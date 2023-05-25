@@ -1,6 +1,10 @@
 import React, { createContext, useContext } from 'react';
 import Proptypes from 'prop-types';
 import usePersistedState from './usePersistedState'
+import io from 'socket.io-client'
+import { endpoint } from '../api/api';
+
+const socket = io.connect(endpoint);
   
 const AppContext = createContext();
 export const useAppContext = () => {
@@ -12,9 +16,10 @@ export const useAppContext = () => {
 export const AppContextProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = usePersistedState('isLoggedIn', false);
     const [user, setUser] = usePersistedState('user', {});
+    const [room, setRoom] = usePersistedState('currentRoom', '');
 
     return (
-        <AppContext.Provider value={{ isLoggedIn, setIsLoggedIn, user, setUser }}>
+        <AppContext.Provider value={{ socket, isLoggedIn, setIsLoggedIn, user, setUser, room, setRoom }}>
             {children}
         </AppContext.Provider>
     );

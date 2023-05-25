@@ -1,7 +1,7 @@
-import { restendpoint } from './api'
+import { endpoint } from './api'
 
 export async function postData(url = "", data = {}) {
-    const mainurl = restendpoint + url;
+    const mainurl = endpoint + url;
     try{
         const response = await fetch(mainurl, {
             method: "POST",

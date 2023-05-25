@@ -9,7 +9,7 @@
     flex-direction: row;
     align-items: stretch;
     width: 100%;
-    height: 100%;
+    height: calc(100% - 80px);
     background: gray;
 }
 
@@ -23,6 +23,8 @@
 }
 
 .Templated .playground .ground{
+    width: 100%;
+    height: 100%;
     overflow-y: auto;
 }
 

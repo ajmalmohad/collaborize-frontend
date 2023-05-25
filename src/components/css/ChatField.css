@@ -1,0 +1,33 @@
+.ChatField{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: stretch;
+    padding: 10px 20px;
+}
+
+.ChatField input{
+    flex: 1;
+    height: 40px;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 10px;
+    border: none;
+    background: var(--off-gray);
+    outline: none;
+    padding:10px 20px;
+}
+
+.ChatField button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    color: white;
+    background: green;
+    height: 40px;
+    border:none;
+    font-size: 30px;
+    border-radius: 10px;
+    margin-left: 10px;
+}
