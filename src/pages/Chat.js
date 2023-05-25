@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './css/Chat.css'
 import TextField from './../components/TextField'
 import SubmitButton from './../components/SubmitButton'
-import { useAppContext } from './../contexts/AuthContext'
 import { useNavigate } from 'react-router-dom';
 
 
@@ -10,8 +9,7 @@ import { useNavigate } from 'react-router-dom';
 function Chat() {
 
   const navigate = useNavigate();
-
-  const { socket,  user, room, setRoom } = useAppContext();
+  const [room, setRoom] = useState("");
 
   const handleChange = (event, label) => {
     let value = event.target.value;
@@ -19,11 +17,7 @@ function Chat() {
   }
 
   const joinRoom = () => {
-    let username = user.name;
-    if (room !== '' && username !== '') {
-      socket.emit('join_room', { username , room });
-    }
-    navigate('/chat-room', { replace: true });
+    if(room!=="") navigate(`/chat/${room}`, { replace: true });
   };
   
   return (
