@@ -100,11 +100,10 @@ function Chatroom() {
 
         <TextField value={message} action={(e)=>handleChange(e,"message")} label={"Message"} />
         <SubmitButton action={handleSubmit} value={"Send"} />
-        <SubmitButton action={handleLeave} value={"Leave"} />
       </div>
 
       <div className='sidebar'>
-        <ChatRoomBar room={room} roomUsers={roomUsers} />
+        <ChatRoomBar room={room} roomUsers={roomUsers} onLeave={handleLeave} />
       </div>
 
     </div>
