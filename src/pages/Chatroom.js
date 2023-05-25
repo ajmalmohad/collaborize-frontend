@@ -9,21 +9,21 @@ import FormattedMessage from '../components/FormattedMessage'
 function Chatroom() {
 
   const { roomId } = useParams();
-  const room = roomId;
 
   const navigate = useNavigate();
   const BottomRef = useRef(null);
 
-  const { socket,  user, } = useAppContext();
+  const { socket,  user } = useAppContext();
   const [messagesRecieved, setMessagesReceived] = useState([]);
   const [ roomUsers, setRoomUsers ] = useState([]);
   const [message, setMessage] = useState('');
 
   useEffect(() => {
 
-    if (room !== '' && user.name !== '') {
-      let username = user.name
-      socket.emit('join_room', { username , room });
+    if (roomId !== '' && user.name !== '') { 
+      let name = user.name
+      let email = user.email
+      socket.emit('join_room', { name, email, roomId });
       
       socket.on('receive_message', (data) => {
         console.log(data);
@@ -31,7 +31,8 @@ function Chatroom() {
           ...state,
           {
             message: data.message,
-            username: data.username,
+            name: data.name,
+            email: data.email,
             __createdtime__: data.__createdtime__,
           },
         ]);
@@ -48,7 +49,7 @@ function Chatroom() {
       socket.off('receive_message');
       socket.off('chatroom_users');
     }
-  }, [socket, user, room]);
+  }, [socket, user, roomId]);
 
   useEffect(() => {
     BottomRef.current?.scrollIntoView({ behavior: "smooth" })
@@ -56,17 +57,19 @@ function Chatroom() {
   
 
   const leaveRoom = () => {
-    const username = user.name;
+    const name = user.name;
+    const email = user.email
     const __createdtime__ = Date.now();
-    socket.emit('leave_room', { username, room, __createdtime__ });
+    socket.emit('leave_room', { name, email, roomId, __createdtime__ });
     navigate('/chat', { replace: true });
   };
 
   const sendMessage = () => {
-    const username = user.name;
+    const name = user.name;
+    const email = user.email;
     if (message !== '') {
       const __createdtime__ = Date.now();
-      socket.emit('send_message', { username, room, message, __createdtime__ });
+      socket.emit('send_message', { name, email, roomId, message, __createdtime__ });
       setMessage('');
     }
   };
@@ -90,7 +93,7 @@ function Chatroom() {
       <div className='chatwindow'>
         <div className='chats no-scrollbar'>
           {messagesRecieved.map((msg, i) => (
-            <FormattedMessage key={i} username={msg.username} time={msg.__createdtime__} message={msg.message} />
+            <FormattedMessage key={i} name={msg.name} email={msg.email} time={msg.__createdtime__} message={msg.message} />
           ))}
           <div ref={BottomRef} />
         </div>
@@ -102,7 +105,7 @@ function Chatroom() {
       </div>
 
       <div className='sidebar'>
-        <ChatRoomBar room={room} roomUsers={roomUsers} onLeave={handleLeave} />
+        <ChatRoomBar room={roomId} roomUsers={roomUsers} onLeave={handleLeave} />
       </div>
 
     </div>

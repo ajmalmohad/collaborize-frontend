@@ -1,17 +1,18 @@
 import React from 'react'
 import './css/FormattedMessage.css'
 
-function FormattedMessage({username, message, time}) {
+function FormattedMessage({name, email, message, time}) {
 
     function formatDateFromTimestamp(timestamp) {
         const date = new Date(timestamp);
+        console.log(email);
         return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
     }
     
   return (
     <div className='FormattedMessage'>
         <div className='header'>
-            <p className='username'>{username}</p>
+            <p className='username'>{name}</p>
             <p>{formatDateFromTimestamp(time)}</p>
         </div>
         <p className='message'>
