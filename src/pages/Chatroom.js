@@ -19,12 +19,11 @@ function Chatroom() {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
+    let name = user.name
+    let email = user.email
 
     if (roomId !== '' && user.name !== '') { 
-      let name = user.name
-      let email = user.email
       socket.emit('join_room', { name, email, roomId });
-      
       socket.on('receive_message', (data) => {
         console.log(data);
         setMessagesReceived((state) => [
@@ -46,8 +45,10 @@ function Chatroom() {
     }
 
     return () => {
+      const __createdtime__ = Date.now();
       socket.off('receive_message');
       socket.off('chatroom_users');
+      socket.emit('leave_room', { name, email, roomId, __createdtime__ });
     }
   }, [socket, user, roomId]);
 

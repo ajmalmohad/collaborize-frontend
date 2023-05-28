@@ -12,6 +12,7 @@ import Draw from './pages/Draw';
 import { Toaster } from 'react-hot-toast';
 import Templated from './components/Templated';
 import Chatroom from './pages/Chatroom';
+import Drawroom from './pages/Drawroom';
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="/chat" element={ <Protected><Templated label={"Chat"}><Chat/></Templated></Protected> } />
         <Route path="/draw" element={ <Protected><Templated label={"Draw"}><Draw/></Templated></Protected> } />
         <Route path="/chat/:roomId" element={ <Protected><Templated label={"Chat"}><Chatroom/></Templated></Protected> } />
+        <Route path="/draw/:roomId" element={ <Protected><Templated label={"Draw"}><Drawroom/></Templated></Protected> } />
         <Route path="*" element={ <Error/> } />
       </Routes>
       <div><Toaster position='bottom-right'/></div>
