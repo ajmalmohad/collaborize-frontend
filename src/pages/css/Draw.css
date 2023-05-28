@@ -1,0 +1,22 @@
+.Draw{
+    width: 100%;
+    height: 100%;
+}
+
+.Draw .join{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.Draw .join .fields{
+    width: 80%;
+    max-width: 400px;
+}
+
+.Draw .join .fields > *{
+    margin: 20px 0;
+}

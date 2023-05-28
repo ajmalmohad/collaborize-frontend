@@ -22,8 +22,12 @@ function Chat() {
   
   return (
     <div className='Chat'>
-      <TextField value={room} action={(e)=>handleChange(e,"room")} label={"Room Code"} />
-      <SubmitButton value={"Join Room"} action={joinRoom} />
+      <div className='join'>
+        <div className='fields'>
+          <TextField value={room} action={(e)=>handleChange(e,"room")} label={"Room Code"} />
+          <SubmitButton value={"Join Room"} action={joinRoom} />
+        </div>
+      </div>
     </div>
   )
 

@@ -10,7 +10,7 @@
     align-items: stretch;
     width: 100%;
     height: calc(100% - 80px);
-    background: gray;
+    background: var(--dark-gray);
 }
 
 .Templated .playground .bar{

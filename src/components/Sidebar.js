@@ -13,7 +13,7 @@ function Sidebar({ label }) {
         <Link to="/home"><AiFillHome className={`${label==="Home" ? "selected" : ""}`} /></Link>
         <Link to="/chat"><BsFillChatFill className={`${label==="Chat" ? "selected" : ""}`} /></Link>
         <Link to="/draw"><MdDraw className={`${label==="Draw" ? "selected" : ""}`} /></Link>
-        <Link to="/home"><FaUserAlt className={`${label==="Profile" ? "selected" : ""}`} /></Link>
+        <Link to="/profile"><FaUserAlt className={`${label==="Profile" ? "selected" : ""}`} /></Link>
       </div>
     </div>
   )

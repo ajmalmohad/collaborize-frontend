@@ -1,0 +1,22 @@
+.Chat{
+    width: 100%;
+    height: 100%;
+}
+
+.Chat .join{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.Chat .join .fields{
+    width: 80%;
+    max-width: 400px;
+}
+
+.Chat .join .fields > *{
+    margin: 20px 0;
+}
