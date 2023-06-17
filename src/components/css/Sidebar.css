@@ -15,17 +15,7 @@
 }
 
 .Sidebar .icons > *{
-    opacity: 50%;
     transition: 0.2s all;
-}
-
-.Sidebar .icons > *:hover{
-    opacity: 100%;
-    transition: 0.2s all;
-}
-
-.Sidebar .icons .selected{
-    opacity: 100%;
 }
 
 .Sidebar .icons > *{
@@ -35,6 +25,14 @@
 
 .Sidebar .icons a{
     text-decoration: none;
+    color: var(--very-whiter-gray);
+}
+
+.Sidebar .icons a:hover{
+    color: var(--white);
+}
+
+.Sidebar .icons .selected{
     color: var(--white);
 }
 
