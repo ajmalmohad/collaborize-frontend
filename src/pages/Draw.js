@@ -22,7 +22,7 @@ function Draw() {
     <div className='Draw'>
       <div className='join'>
         <div className='fields'>
-          <TextField value={room} action={(e)=>handleChange(e,"room")} label={"Room Code"} />
+          <TextField value={room} placeholder={"Enter Drawing Room Code"} action={(e)=>handleChange(e,"room")} label={"Room Code"} />
           <SubmitButton value={"Join Room"} action={joinRoom} />
         </div>
       </div>
