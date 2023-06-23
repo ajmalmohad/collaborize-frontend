@@ -1,0 +1,28 @@
+.Home{
+    padding:20px 20px;
+}
+
+.Home .heading{
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.Home .rooms{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.Home .rooms .room{
+    margin-top: 30px;
+    margin-right: 30px;
+    text-align: center;
+    padding: 20px 0;
+    width: 260px;
+    color: var(--white);
+    background: var(--accent-blue);
+    border-radius: 10px;
+}
+
+.Home .rooms .room.draw{
+    background: var(--second-blue);
+}

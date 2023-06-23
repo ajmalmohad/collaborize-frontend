@@ -17,7 +17,7 @@ function Drawroom() {
         const canvas = canvasRef.current;
         const context = canvas.getContext('2d');
 
-        if (roomId !== '' && user.name !== '') {
+        if (canvas && roomId !== '' && user.name !== '') {
             socket.emit('join_room', { name, email, roomId });
             let drawing = false;
 
