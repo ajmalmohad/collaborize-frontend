@@ -92,8 +92,10 @@ function Drawroom() {
             canvas.addEventListener('touchmove', throttle(onMouseMove, 10), false);
 
             const onResize = () => {
-                canvas.width = canvasRef.current.clientWidth;
-                canvas.height = canvasRef.current.clientHeight;
+                if(canvasRef.current){
+                  canvas.width = canvasRef.current.clientWidth;
+                  canvas.height = canvasRef.current.clientHeight;
+                }
             };
 
             window.addEventListener('resize', onResize, false);
