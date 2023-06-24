@@ -66,7 +66,7 @@ function Drawroom() {
                 if (!drawing) { return; }
                 drawing = false;
                 var bounds = e.currentTarget.getBoundingClientRect();
-                drawLine(current.x, current.y, e.clientX - bounds.left || e.touches[0].clientX - bounds.left, e.clientY - bounds.top || e.touches[0].clientY - bounds.top, current.color, true);
+                if(e.clientX || e.touches.length > 0) drawLine(current.x, current.y, e.clientX - bounds.left || e.touches[0].clientX - bounds.left, e.clientY - bounds.top || e.touches[0].clientY - bounds.top, current.color, true);
             };
 
             const throttle = (callback, delay) => {
