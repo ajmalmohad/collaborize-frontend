@@ -1,8 +1,11 @@
 .Drawroom{
     position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: 100%;
-    overflow-x: hidden;
 }
 
 .Drawroom .canvascontainer{
@@ -39,6 +42,9 @@
     color: var(--white);
     background-color: var(--very-dark-gray);
     cursor: pointer;
+    -webkit-user-select: none; /* Safari */
+     -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none;
 }
 
 .Drawroom .tooler{

@@ -17,7 +17,7 @@ function Drawroom() {
   const canvasWidth = 1920;
   let [color, _setColor] = useState("#000000");
   let [coloropen, setColorOpen] = useState(false);
-  let [toolopen, setToolOpen] = useState(false);
+  let [toolopen, setToolOpen] = useState(true);
   const myColor = React.useRef(color);
   const setColor = data => {
     myColor.current = data;
@@ -30,6 +30,8 @@ function Drawroom() {
 
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
+    context.fillStyle = "#ffffff";
+    context.fillRect(0, 0, canvas.width, canvas.height);
     let drawing = false;
     let scale = 1;
     let current=  {};
@@ -114,7 +116,6 @@ function Drawroom() {
     const onResize = () => {
       if (canvas) {
         scale = canvas.getBoundingClientRect().width/canvasWidth;
-        console.log(scale);
       }
     };
 
