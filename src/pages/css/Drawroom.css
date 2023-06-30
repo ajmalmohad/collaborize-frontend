@@ -42,8 +42,8 @@
     color: var(--white);
     background-color: var(--very-dark-gray);
     cursor: pointer;
-    -webkit-user-select: none; /* Safari */
-     -ms-user-select: none; /* IE 10 and IE 11 */
+    -webkit-user-select: none;
+    -ms-user-select: none; 
     user-select: none;
 }
 
