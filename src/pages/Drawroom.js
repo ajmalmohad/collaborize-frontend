@@ -1,8 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './css/Drawroom.css';
 import { useAppContext } from './../contexts/AuthContext';
 import { useNavigate, useParams } from 'react-router-dom';
 import { IoMdExit } from 'react-icons/io';
+import { AiOutlineBgColors } from 'react-icons/ai';
+import { TwitterPicker } from 'react-color';
 
 function Drawroom() {
   const canvasRef = useRef(null);
@@ -12,6 +14,13 @@ function Drawroom() {
   const { socket, user } = useAppContext();
   const canvasWidth = 1920;
   const canvasHeight = 1080;
+  let [color, _setColor] = useState("#000000");
+  let [coloropen, setColorOpen] = useState(false);
+  const myColor = React.useRef(color);
+  const setColor = data => {
+    myColor.current = data;
+    _setColor(data);
+  };
 
   useEffect(() => {
     let name = user.name;
@@ -21,12 +30,9 @@ function Drawroom() {
     const context = canvas.getContext('2d');
     let drawing = false;
     let scale = 1;
-    const current = {
-      color: 'black',
-    };
+    let current=  {};
 
     const drawLine = (x0, y0, x1, y1, color, emit) => {
-      console.log(x0, y0, x1, y1);
       context.beginPath();
       context.moveTo(x0/scale, y0/scale);
       context.lineTo(x1/scale, y1/scale);
@@ -67,7 +73,7 @@ function Drawroom() {
         current.y,
         e.clientX - bounds.left || e.touches[0].clientX - bounds.left,
         e.clientY - bounds.top || e.touches[0].clientY - bounds.top,
-        current.color,
+        myColor.current,
         true
       );
       current.x = e.clientX - bounds.left || e.touches[0].clientX - bounds.left;
@@ -86,7 +92,7 @@ function Drawroom() {
           current.y,
           e.clientX - bounds.left || e.touches[0].clientX - bounds.left,
           e.clientY - bounds.top || e.touches[0].clientY - bounds.top,
-          current.color,
+          myColor.current,
           true
         );
     };
@@ -148,6 +154,8 @@ function Drawroom() {
       socket.off('Drawroom_users');
       socket.emit('leave_room', { name, email, roomId, __createdtime__ });
     };
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [socket, user, roomId]);
 
   const leaveRoom = () => {
@@ -162,6 +170,10 @@ function Drawroom() {
     <div className="Drawroom" ref={parentRef}>
       <div className='tooler'>
           <div className='tool leave' onClick={leaveRoom}><IoMdExit /></div>
+          <div className='tool'>
+            <AiOutlineBgColors onClick={()=>{setColorOpen(prev => !prev)}} />
+            { coloropen ? <TwitterPicker className='popup' color={ color } onChangeComplete={ (color)=>{setColor(color.hex); setColorOpen(prev => !prev)} } /> : ""}
+            </div>
       </div>
       <canvas ref={canvasRef} className="whiteboard" />
     </div>

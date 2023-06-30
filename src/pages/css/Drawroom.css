@@ -42,8 +42,20 @@
     border-radius: 10px;
     font-family: 'Poppins', sans-serif;
     color: var(--white);
+    background-color: var(--very-dark-gray);
+    margin-bottom: 10px;
+}
+
+.Drawroom .tool:last-child{
+    margin-bottom: 0px;
 }
 
 .Drawroom .tool.leave{
     background-color: var(--error);
+}
+
+.Drawroom .tool .popup{
+    position: absolute !important;
+    top:-40px;
+    right:0;
 }
