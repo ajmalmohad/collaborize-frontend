@@ -167,16 +167,16 @@ function Drawroom() {
   };
 
   return (
-    <div className="Drawroom" ref={parentRef}>
-      <div className='tooler'>
-          <div className='tool leave' onClick={leaveRoom}><IoMdExit /></div>
-          <div className='tool'>
-            <AiOutlineBgColors onClick={()=>{setColorOpen(prev => !prev)}} />
-            { coloropen ? <TwitterPicker className='popup' color={ color } onChangeComplete={ (color)=>{setColor(color.hex); setColorOpen(prev => !prev)} } /> : ""}
-            </div>
+      <div className="Drawroom" ref={parentRef}>
+        <div className='tooler'>
+            <div className='tool leave' onClick={leaveRoom}><IoMdExit /></div>
+            <div className='tool'>
+              <AiOutlineBgColors onClick={()=>{setColorOpen(prev => !prev)}} />
+              { coloropen ? <TwitterPicker className='popup' color={ color } onChangeComplete={ (color)=>{setColor(color.hex); setColorOpen(prev => !prev)} } /> : ""}
+              </div>
+        </div>
+        <canvas ref={canvasRef} className="whiteboard" />
       </div>
-      <canvas ref={canvasRef} className="whiteboard" />
-    </div>
   );
 }
 

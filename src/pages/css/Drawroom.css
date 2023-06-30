@@ -1,9 +1,9 @@
 .Drawroom{
+    overflow: hidden;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
     width: 100%;
     height: 100%;
     padding: 20px;
@@ -11,7 +11,6 @@
 
 .Drawroom canvas{
     position: relative;
-    display: inline-block;
     background: white;
     height: 1080px;
     width: 1920px;
@@ -19,10 +18,10 @@
 }
 
 .Drawroom .tooler{
-    position: absolute;
+    position: fixed;
     height: auto;
     top:50%;
-    right:20px;
+    right:30px;
     transform: translate(0, -50%);
     padding: 20px;
     background: var(--light-gray);
