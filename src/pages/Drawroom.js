@@ -18,17 +18,17 @@ function Drawroom() {
 
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
-
     let drawing = false;
-
+    let scale = 1;
     const current = {
       color: 'black',
     };
 
     const drawLine = (x0, y0, x1, y1, color, emit) => {
+      console.log(x0, y0, x1, y1);
       context.beginPath();
-      context.moveTo(x0, y0);
-      context.lineTo(x1, y1);
+      context.moveTo(x0/scale, y0/scale);
+      context.lineTo(x1/scale, y1/scale);
       context.strokeStyle = color;
       context.lineWidth = 2;
       context.stroke();
@@ -41,10 +41,10 @@ function Drawroom() {
       const h = canvas.height;
 
       socket.emit('drawing', {
-        x0: x0 / w,
-        y0: y0 / h,
-        x1: x1 / w,
-        y1: y1 / h,
+        x0: x0/scale / w,
+        y0: y0/scale / h,
+        x1: x1/scale / w,
+        y1: y1/scale / h,
         color,
       });
     };
@@ -103,23 +103,13 @@ function Drawroom() {
     };
 
     const onResize = () => {
-      if (canvasRef.current) {
-        const screenWidth = parentRef.current.clientWidth;
-        const screenHeight = parentRef.current.clientHeight;
-        let scale = Math.min(screenWidth - 20, 1920) / canvasWidth;
-        let scaledWidth = canvasWidth * scale;
-        let scaledHeight = canvasHeight * scale;
-        if(scaledHeight > screenHeight - 20){
-          scale = Math.min(screenHeight - 20, 1080) / canvasHeight;
-          scaledWidth = canvasWidth * scale;
-          scaledHeight = canvasHeight * scale;
-        }
-        
-        canvas.width = scaledWidth;
-        canvas.height = scaledHeight;
-
-        canvas.style.width = `${scaledWidth}px`;
-        canvas.style.height = `${scaledHeight}px`;
+      if (canvas) {
+        const screenWidth = parentRef.current.clientWidth - 40;
+        const screenHeight = parentRef.current.clientHeight - 40;
+        scale = screenWidth/canvasWidth;
+        if(scale*canvasHeight > screenHeight) scale = screenHeight/canvasHeight;
+        scale = Math.min(scale, 1);
+        canvas.style.transform = `scale(${scale})`;
       }
     };
 
@@ -129,11 +119,14 @@ function Drawroom() {
     const onDrawingEvent = (data) => {
       const w = canvas.width;
       const h = canvas.height;
-      drawLine(data.x0 * w, data.y0 * h, data.x1 * w, data.y1 * h, data.color);
+      drawLine(data.x0*scale * w, data.y0*scale * h, data.x1*scale * w, data.y1*scale * h, data.color);
     };
 
     if (canvas && roomId !== '' && user.name !== '') {
       socket.emit('join_room', { name, email, roomId });
+
+      canvas.height = canvasHeight;
+      canvas.width = canvasWidth;
 
       canvas.addEventListener('mousedown', onMouseDown, false);
       canvas.addEventListener('mouseup', onMouseUp, false);

@@ -1,17 +1,22 @@
 .Drawroom{
     position: relative;
-    height: 100%;
-    width: 100%;
-    overflow: auto;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
 }
 
 .Drawroom canvas{
+    position: relative;
+    display: inline-block;
     background: white;
-    width: 100%;
+    height: 1080px;
+    width: 1920px;
     border: 1px solid var(--accent-blue);
+    transform: scale(1);
 }
 
 .Drawroom button{
@@ -26,4 +31,5 @@
     color: var(--white);
     border: none;
     border-radius: 10px;
+    z-index: 100;
 }
