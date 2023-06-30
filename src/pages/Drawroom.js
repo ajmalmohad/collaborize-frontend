@@ -4,18 +4,20 @@ import { useAppContext } from './../contexts/AuthContext';
 import { useNavigate, useParams } from 'react-router-dom';
 import { IoMdExit } from 'react-icons/io';
 import { AiOutlineBgColors } from 'react-icons/ai';
+import { GiHamburgerMenu } from 'react-icons/gi';
 import { TwitterPicker } from 'react-color';
 
 function Drawroom() {
   const canvasRef = useRef(null);
   const parentRef = useRef(null);
+  const roomRef = useRef(null);
   const { roomId } = useParams();
   const navigate = useNavigate();
   const { socket, user } = useAppContext();
   const canvasWidth = 1920;
-  const canvasHeight = 1080;
   let [color, _setColor] = useState("#000000");
   let [coloropen, setColorOpen] = useState(false);
+  let [toolopen, setToolOpen] = useState(false);
   const myColor = React.useRef(color);
   const setColor = data => {
     myColor.current = data;
@@ -111,12 +113,8 @@ function Drawroom() {
 
     const onResize = () => {
       if (canvas) {
-        const screenWidth = parentRef.current.clientWidth - 40;
-        const screenHeight = parentRef.current.clientHeight - 40;
-        scale = screenWidth/canvasWidth;
-        if(scale*canvasHeight > screenHeight) scale = screenHeight/canvasHeight;
-        scale = Math.min(scale, 1);
-        canvas.style.transform = `scale(${scale})`;
+        scale = canvas.getBoundingClientRect().width/canvasWidth;
+        console.log(scale);
       }
     };
 
@@ -131,10 +129,7 @@ function Drawroom() {
 
     if (canvas && roomId !== '' && user.name !== '') {
       socket.emit('join_room', { name, email, roomId });
-
-      canvas.height = canvasHeight;
-      canvas.width = canvasWidth;
-
+      
       canvas.addEventListener('mousedown', onMouseDown, false);
       canvas.addEventListener('mouseup', onMouseUp, false);
       canvas.addEventListener('mouseout', onMouseUp, false);
@@ -167,15 +162,20 @@ function Drawroom() {
   };
 
   return (
-      <div className="Drawroom" ref={parentRef}>
-        <div className='tooler'>
+      <div className="Drawroom" ref={roomRef}>
+        <div className='tool-hamburger' onClick={()=>{setToolOpen(prev => !prev)}}>
+          <GiHamburgerMenu />
+        </div>
+        <div className='tooler' style={{ right: toolopen ? "30px" : "-100px" }}>
             <div className='tool leave' onClick={leaveRoom}><IoMdExit /></div>
             <div className='tool'>
               <AiOutlineBgColors onClick={()=>{setColorOpen(prev => !prev)}} />
               { coloropen ? <TwitterPicker className='popup' color={ color } onChangeComplete={ (color)=>{setColor(color.hex); setColorOpen(prev => !prev)} } /> : ""}
-              </div>
+            </div>
         </div>
-        <canvas ref={canvasRef} className="whiteboard" />
+        <div className='canvascontainer' ref={parentRef}>
+          <canvas ref={canvasRef} height={1080} width={1920} className="whiteboard" />
+        </div>
       </div>
   );
 }
