@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import './css/Drawroom.css';
 import { useAppContext } from './../contexts/AuthContext';
 import { useNavigate, useParams } from 'react-router-dom';
+import { IoMdExit } from 'react-icons/io';
 
 function Drawroom() {
   const canvasRef = useRef(null);
@@ -159,7 +160,9 @@ function Drawroom() {
 
   return (
     <div className="Drawroom" ref={parentRef}>
-      <button onClick={leaveRoom}>Leave</button>
+      <div className='tooler'>
+          <div className='tool leave' onClick={leaveRoom}><IoMdExit /></div>
+      </div>
       <canvas ref={canvasRef} className="whiteboard" />
     </div>
   );
