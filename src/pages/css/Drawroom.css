@@ -2,13 +2,16 @@
     position: relative;
     height: 100%;
     width: 100%;
-    overflow: hidden;
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .Drawroom canvas{
     background: white;
-    height: 100%;
     width: 100%;
+    border: 1px solid var(--accent-blue);
 }
 
 .Drawroom button{
