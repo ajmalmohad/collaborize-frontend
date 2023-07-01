@@ -81,4 +81,8 @@
     .Chatroom .open-hamburger{
         display: none;
     }
+
+    .Chatroom .chatwindow{
+        padding: 0px;
+    }
 }
