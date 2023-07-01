@@ -2,8 +2,11 @@
     position: relative;
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
     background: linear-gradient(109.6deg, rgb(0, 0, 0) 11.2%, rgb(11, 132, 145) 91.1%);
     background-size: cover;
+    justify-content: space-between;
     overflow: hidden;
 }
 
