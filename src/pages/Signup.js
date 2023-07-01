@@ -113,7 +113,6 @@ function Signup() {
 
   return (
     <div className='Signup'>
-      <div className='background'></div>
       <div className='content'>
         <PreNavbar />
         <div className='form'>
