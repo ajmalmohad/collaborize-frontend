@@ -22,7 +22,7 @@
 
 body {
   margin: 0;
-  background-color: var(--dark-gray);
+  background: var(--light-gray);
   color: var(--white);
   font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
