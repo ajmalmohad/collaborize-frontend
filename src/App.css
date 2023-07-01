@@ -1,4 +1,6 @@
 .App{
     max-width: 2000px;
     margin: auto;
+    background:  url('./images/MainBG.jpg');
+    background-size: cover;
 }

@@ -7,7 +7,7 @@
     background: var(--dark-gray);
     justify-content: space-between;
     overflow: hidden;
-    background: url('./../../images/ChatBackground.svg');
+    background: url('./../../images/MainBG.svg');
     background-size: cover;
 }
 
