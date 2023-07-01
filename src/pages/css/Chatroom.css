@@ -7,7 +7,7 @@
     background: var(--dark-gray);
     justify-content: space-between;
     overflow: hidden;
-    background: url('./../../images/MainBG.svg');
+    background: linear-gradient(109.6deg, rgb(0, 0, 0) 11.2%, rgb(11, 132, 145) 91.1%);
     background-size: cover;
 }
 

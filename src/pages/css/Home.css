@@ -5,7 +5,7 @@
 .Home .heading{
     font-size: 32px;
     font-weight: 500;
-    text-shadow: 0px 0px 10px black;
+    text-shadow: 0px 0px 5px rgb(56, 56, 56);
 }
 
 .Home .rooms{

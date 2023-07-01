@@ -1,6 +1,5 @@
 .App{
     max-width: 2000px;
     margin: auto;
-    background:  url('./images/MainBG.jpg');
-    background-size: cover;
+    background: linear-gradient(-180deg, #070908, #025e6b);
 }
