@@ -1,15 +1,7 @@
 .Login{
     min-height: 100vh;
-    background-image: url(./../../images/Login.jpg);
+    background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
     background-size: cover;
-}
-
-.Login .background{
-    position: fixed;
-    z-index: 0;
-    height: 100%;
-    width: 100%;
-    background-image: linear-gradient(45deg, var(--dark-gray), var(--dark-gray), transparent);
 }
 
 .Login .content{
