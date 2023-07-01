@@ -5,12 +5,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { IoMdExit } from 'react-icons/io';
 import { AiOutlineBgColors } from 'react-icons/ai';
 import { GiHamburgerMenu } from 'react-icons/gi';
+import { FiMaximize2, FiMinimize2 } from 'react-icons/fi';
 import { TwitterPicker } from 'react-color';
 
 function Drawroom() {
   const canvasRef = useRef(null);
   const parentRef = useRef(null);
   const roomRef = useRef(null);
+  const scaleRef = useRef(null);
   const { roomId } = useParams();
   const navigate = useNavigate();
   const { socket, user } = useAppContext();
@@ -18,7 +20,8 @@ function Drawroom() {
   let [color, _setColor] = useState("#000000");
   let [coloropen, setColorOpen] = useState(false);
   let [toolopen, setToolOpen] = useState(true);
-  const myColor = React.useRef(color);
+  let [scaleopen, setScaleOpen] = useState(false);
+  const myColor = useRef(color);
   const setColor = data => {
     myColor.current = data;
     _setColor(data);
@@ -34,6 +37,7 @@ function Drawroom() {
     context.fillRect(0, 0, canvas.width, canvas.height);
     let drawing = false;
     let scale = 1;
+    let scaled = false;
     let current=  {};
 
     const drawLine = (x0, y0, x1, y1, color, emit) => {
@@ -128,7 +132,21 @@ function Drawroom() {
       drawLine(data.x0*scale * w, data.y0*scale * h, data.x1*scale * w, data.y1*scale * h, data.color);
     };
 
-    if (canvas && roomId !== '' && user.name !== '') {
+    const onScale = () => {
+      if(scaled){;
+        roomRef.current.style.display = "flex";
+        parentRef.current.style.width = "100%";
+        scale = canvas.getBoundingClientRect().width/canvasWidth;
+        scaled = !scaled;
+      }else{
+        roomRef.current.style.display = "block";
+        parentRef.current.style.width = `${100*2}%`;
+        scale = canvas.getBoundingClientRect().width/canvasWidth;
+        scaled = !scaled;
+      }
+    }
+
+    if (canvas && scaleRef.current && roomId !== '' && user.name !== '') {
       socket.emit('join_room', { name, email, roomId });
       
       canvas.addEventListener('mousedown', onMouseDown, false);
@@ -140,6 +158,8 @@ function Drawroom() {
       canvas.addEventListener('touchend', onMouseUp, false);
       canvas.addEventListener('touchcancel', onMouseUp, false);
       canvas.addEventListener('touchmove', throttle(onMouseMove, 10), false);
+
+      scaleRef.current.addEventListener('click', onScale, false);
 
       socket.on('drawing', onDrawingEvent);
     }
@@ -168,6 +188,7 @@ function Drawroom() {
           <GiHamburgerMenu />
         </div>
         <div className='tooler' style={{ right: toolopen ? "30px" : "-100px" }}>
+            <div className='tool scale' ref={scaleRef} onClick={()=>{setScaleOpen(prev => !prev)}}>{scaleopen ? <FiMinimize2 /> : <FiMaximize2 />}</div>
             <div className='tool leave' onClick={leaveRoom}><IoMdExit /></div>
             <div className='tool'>
               <AiOutlineBgColors onClick={()=>{setColorOpen(prev => !prev)}} />
