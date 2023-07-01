@@ -1,12 +1,16 @@
 .SubmitButton button{
-    background: var(--accent-blue);
     width: 100%;
     min-width: 0px;
     font-family: 'Poppins', sans-serif;
     padding: 16px 20px;
     border: none;
-    border-radius: 10px;
     color: var(--white);
     cursor: pointer;
     font-size: 16px;
+    background: rgba( 30, 144, 238, 0.6 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 12px );
+    -webkit-backdrop-filter: blur( 12px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
