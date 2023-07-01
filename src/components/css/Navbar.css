@@ -1,4 +1,5 @@
 .Navbar{
+    position: relative;
     height: 80px;
     background: var(--dark-gray);
     padding: 16px min(8%, 40px);
@@ -6,6 +7,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    z-index: 10;
 }
 
 .Navbar img{
