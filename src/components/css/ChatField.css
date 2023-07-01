@@ -5,17 +5,22 @@
     align-items: center;
     justify-content: stretch;
     padding: 10px 20px;
+    transition: 0.3s all ease;
 }
 
 .ChatField input{
     flex: 1;
     height: 40px;
     font-family: 'Poppins', sans-serif;
-    border-radius: 10px;
-    border: none;
-    background: var(--off-gray);
     outline: none;
     padding:10px 20px;
+    color: white;
+    background: rgba( 255, 255, 255, 0.25 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 9px );
+    -webkit-backdrop-filter: blur( 9px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 
 .ChatField button{
@@ -24,10 +29,13 @@
     justify-content: center;
     width: 40px;
     color: white;
-    background: green;
     height: 40px;
-    border:none;
     font-size: 30px;
-    border-radius: 10px;
     margin-left: 10px;
+    background: rgba( 126, 211, 33, 0.55 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 9px );
+    -webkit-backdrop-filter: blur( 9px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
 }

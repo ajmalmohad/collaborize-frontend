@@ -1,15 +1,26 @@
 .ChatRoomBar{
     height: 100%;
     width: 100%;
-    background: var(--medium-gray);
     overflow-x: hidden;
+    background: rgba( 51, 54, 69, 0.45 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 12px );
+    -webkit-backdrop-filter: blur( 12px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 
 .ChatRoomBar .header{
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: var(--very-dark-gray);
+    background: rgba( 19, 19, 19, 0.45 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 12px );
+    -webkit-backdrop-filter: blur( 12px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    padding:10px;
 }
 
 .ChatRoomBar .header button{

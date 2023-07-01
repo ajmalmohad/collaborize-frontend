@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import ChatRoomBar from '../components/ChatRoomBar'
 import ChatField from '../components/ChatField'
 import FormattedMessage from '../components/FormattedMessage'
+import { GiHamburgerMenu } from 'react-icons/gi';
 
 function Chatroom() {
 
@@ -12,11 +13,13 @@ function Chatroom() {
 
   const navigate = useNavigate();
   const BottomRef = useRef(null);
+  const sidebarRef = useRef(null);
 
   const { socket,  user } = useAppContext();
   const [messagesRecieved, setMessagesReceived] = useState([]);
   const [ roomUsers, setRoomUsers ] = useState([]);
   const [message, setMessage] = useState('');
+  const [toolopen, setToolOpen] = useState(true);
 
   useEffect(() => {
     let name = user.name
@@ -107,8 +110,12 @@ function Chatroom() {
 
       </div>
 
-      <div className='sidebar'>
+      <div className='sidebar' ref={sidebarRef} style={{position: toolopen ? "relative" : "absolute", right: toolopen ? "0%" : "-35%"}}>
         <ChatRoomBar room={roomId} roomUsers={roomUsers} onLeave={handleLeave} />
+      </div>
+
+      <div className='open-hamburger' onClick={()=>{setToolOpen(prev => !prev)}}>
+          <GiHamburgerMenu />
       </div>
 
     </div>
